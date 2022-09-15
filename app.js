@@ -34,8 +34,8 @@ app.post('/newsletter', (req, res) => {
     var mailOptions = {
         from: 'gskiserver@gmail.com',
         to: email,
-        subject: 'Thanks For Signing In To Our NewsLetter',
-        html: `<p>Hi <b>${firstname}</b> Thank you for signing up to our Newsletter.</p>`
+        subject: 'Thanks For Signing Up To Our NewsLetter',
+        html: `<p>Hi <b>${firstname}</b>, Thank you for signing up to our Newsletter.</p>`
     };
       
     transport.sendMail(mailOptions, (err, info)=> {
@@ -59,9 +59,9 @@ app.post('/newsletter', (req, res) => {
     });
     var mailOptions = {
         from: 'gskiserver@gmail.com',
-        to: 'dandowsky09@gmail.com',//gski admin email
+        to: 'newsletter@gskinitiative.org',//gski admin email
         subject: 'New SignUp To Our NewsLetter On GSKI NIG',
-        html: `<p>Name: <b>${firstname}</b> \nEmail: <b>${email}</b></p>`
+        html: `<p>Name: <b>${firstname}</b><br>Email: <b>${email}</b></p>`
     };
       
     transportAdmin.sendMail(mailOptions, (err, info)=> {
@@ -89,11 +89,35 @@ app.post('/newsletter', (req, res) => {
 
 
 
-
-app.post('/comments', (res, req) => {
+// ######  POST comments
+ app.post('/comment', (req, res) => {
     const {name, comment} = req.body;
+    const db = dbService.getDbServiceInstance();
+    const result = db.insertNewComment(name, comment);
+    
+ 
+    result
+    .then(data => res.status(200).json({success : true , message : 'Comment posted successfully'}))
+    .catch(error => console.log(error));
+    console.log('Comment route is working')
+ });
 
-})
+
+//  ######## GET all comments on a particular page
+app.get('/getAllCommentsIndexPage', (request, response) => {
+    const db = dbService.getDbServiceInstance();    
+    const result = db.getAllComments();
+
+    result
+    .then(data => response.json({        
+        data : data
+    }))
+    .catch(error => console.log(error));
+    console.log('Get comment route working');
+   
+
+
+});
 
 
 
