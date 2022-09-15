@@ -46,7 +46,7 @@ class DbService {
                         
                     } else {
                         // If a user does not exist then :
-                        const query = "INSERT INTO newletters (firstname, email, date_added) VALUES (?, ?, ?);";
+                        const query = "INSERT INTO newletter (firstname, email, date_added) VALUES (?, ?, ?);";
                         connection.query(query, [firstname, email, dateAdded], (err, result)=> {
                          //if theres an error then:
                         if(err) reject(new Error(err.message));
