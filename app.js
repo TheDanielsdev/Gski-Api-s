@@ -76,13 +76,13 @@ app.post('/newsletter', (req, res) => {
 
 
 
-    if(!firstname && email) {
-        res.status(400).json({ message: 'all reqired'})
-    }
+    // if(!firstname && email) {
+    //     res.status(400).json({ message: 'all reqired'})
+    // }
  
     result
     .then(data => res.status(201).json({success : true , message : 'Signup successful'}))
-    .catch(error => res.json({ message : error.message}));
+    .catch(error => console.log(error));
     console.log('newsletter route is working')
  });
 
