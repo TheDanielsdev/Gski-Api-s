@@ -124,7 +124,7 @@ app.get('/getAllCommentsIndexPage', (request, response) => {
 
 
 
-
-app.listen(process.env.PORT, () => {
-    console.log('App is running');
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+    console.log(`App is running on port ${PORT}`);
 })
