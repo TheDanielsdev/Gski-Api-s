@@ -38,23 +38,14 @@ class DbService {
         try {
             const dateAdded = new Date();
             const insertId = await new Promise((resolve, reject) => {               
-            let checkIfAUserExists = "SELECT * FROM newletters WHERE email = ? LIMIT 1";
-                connection.query(checkIfAUserExists, [email], (err, result) => {                   
-                    if(result.length) {
-                        console.log('User Already Exist')
-                        return new Error('User Already Exist');
-                        
-                    } else {
-                        // If a user does not exist then :
-                        const query = "INSERT INTO newletter (firstname, email, date_added) VALUES (?, ?, ?);";
-                        connection.query(query, [firstname, email, dateAdded], (err, result)=> {
-                         //if theres an error then:
-                        if(err) reject(new Error(err.message));
-                        //if there is no error then:
-                        // resolve(result.insertId);
-                        })
-                    }
-                })
+            // If a user does not exist then :
+            const query = "INSERT INTO newletter (firstname, email, date_added) VALUES (?, ?, ?);";
+            connection.query(query, [firstname, email, dateAdded], (err, result)=> {
+             //if theres an error then:
+            if(err) reject(new Error(err.message));
+            //if there is no error then:
+            // resolve(result.insertId);
+            })
 
             });            
             // console.log(insertId);
