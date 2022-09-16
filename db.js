@@ -111,6 +111,33 @@ class DbService {
             console.log(err);
         }
     }
+
+
+    // ###############  Contact Us     ################
+    async ContactUs(name, email, phone, subject, message) {
+        try {
+            const dateAdded = new Date();
+            const insert = await new Promise((resolve, reject) => {
+              
+                //we use qustion marks so as to avoid sql injection
+                const query = "INSERT INTO contactus (name, email, phone, subject, message, date_added) VALUES (?, ?, ?);";
+
+                connection.query(query, [name, email, phone, subject, message, dateAdded],(error, results) => {
+                    //if theres an error then:
+                    if(error) reject(new Error(error.message));
+                    //if there is no error then:
+                   
+                })
+
+            });
+
+            //this console.log below prints an empty array [] to the console for now because no data exists yet.
+            // console.log(insertComment);
+            // return insert;
+        } catch(err) {
+            console.log(err);
+        }
+    }
     
 
 

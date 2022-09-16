@@ -34,8 +34,8 @@ app.post('/newsletter', (req, res) => {
     var mailOptions = {
         from: 'gskiserver@gmail.com',
         to: email,
-        subject: 'Thanks For Signing Up To Our NewsLetter',
-        html: `<p>Hi <b>${firstname}</b>, Thank you for signing up to our Newsletter.</p>`
+        subject: 'Thanks, For Signing Up To Our NewsLetter',
+        html: `<p>Hi <b>${firstname}</b>, Thank you for signing up to our Newsletter.<br> We are very glad to welcome you to our network. We'll be in touch!.</p>`
     };
       
     transport.sendMail(mailOptions, (err, info)=> {
@@ -118,6 +118,77 @@ app.get('/getAllCommentsIndexPage', (request, response) => {
 
 
 });
+
+
+//Post ContactUs details
+app.post('/contactus', (req, res) => {
+    const {name, email, phone, subject, message} = req.body;
+    const db = dbService.getDbServiceInstance();
+    const result = db.signUpToNewsLetter(name, email, phone, subject, message); 
+    
+     //########   For User ##############
+    var transport = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'gskiserver@gmail.com',
+            pass: 'qjsdpzgtiwjkwent'
+        }
+    });
+    var mailOptions = {
+        from: 'gskiserver@gmail.com',
+        to: email,
+        subject: 'Re: Your Submission On Our Contact Page',
+        html: `<p>Hi <b>${name}</b>, your submission has been recieved.<br>We'll review it and be in touch soon.</p>`
+    };
+      
+    transport.sendMail(mailOptions, (err, info)=> {
+        if(err) {
+            console.log(err)
+        } else {
+            console.log('User Email sent: ' + info.response);
+        }
+    });
+
+
+    
+    //########   For Admin  ##############
+
+    var transportAdmin = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'gskiserver@gmail.com',
+            pass: 'qjsdpzgtiwjkwent'
+        }
+    });
+    var mailOptions = {
+        from: 'gskiserver@gmail.com',
+        to: 'info@gskinitiative.org',//gski admin email
+        subject: 'New Submission On Our Contact Page',
+        html: `<p>Name: <b>${name}</b><br>Email: <b>${email}</b><br>Phone: <b>${phone}</b><br>Subject: <b>${subject}</b><br>Message: <b>${message}</b></p>`
+    };
+      
+    transportAdmin.sendMail(mailOptions, (err, info)=> {
+        if(err) {
+            console.log(err)
+        } else {
+            console.log('Admin Email sent: ' + info.response);
+        }
+    });
+
+
+
+
+
+    // if(!firstname && email) {
+    //     res.status(400).json({ message: 'all reqired'})
+    // }
+ 
+    result
+    .then(data => res.status(201).json({success : true , message : 'Signup successful'}))
+    .catch(error => console.log(error));
+    console.log('newsletter route is working')
+ });
+
 
 
 
