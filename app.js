@@ -83,7 +83,7 @@ app.post('/newsletter', (req, res) => {
     result
     .then(data => res.status(201).json({success : true , message : 'Signup successful'}))
     .catch(error => console.log(error));
-    console.log('newsletter route is working')
+    console.log('Newsletter route is working')
  });
 
 
@@ -186,7 +186,7 @@ app.post('/contactus', (req, res) => {
     result
     .then(data => res.status(201).json({success : true , message : 'Signup successful'}))
     .catch(error => console.log(error));
-    console.log('newsletter route is working')
+    console.log('ContactUs route is working')
  });
 
 
