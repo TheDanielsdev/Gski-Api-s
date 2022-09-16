@@ -120,7 +120,7 @@ class DbService {
             const insert = await new Promise((resolve, reject) => {
               
                 //we use qustion marks so as to avoid sql injection
-                const query = "INSERT INTO contactus (name, email, phone, subject, message, date_added) VALUES (?, ?, ?);";
+                const query = "INSERT INTO contactus (name, email, phone, subject, message, date_added) VALUES (?, ?, ?, ?, ?, ?);";
 
                 connection.query(query, [name, email, phone, subject, message, dateAdded],(error, results) => {
                     //if theres an error then:
