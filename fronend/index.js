@@ -11,7 +11,7 @@ addCommentBtn.onclick = function() {
 if(nameInput.value == "") {
     alert('Field Cannot be empmty');
    } else {
-    fetch('http://localhost:5000/newsletter', {
+    fetch('https://gski-nig.herokuapp.com/newsletter', {
         headers: {
             'Content-type' : 'application/json'
         },
@@ -49,7 +49,7 @@ addComment.onclick = function() {
 if(nameInput.value == "") {
     alert('Field Cannot be empmty');
    } else {
-    fetch('http://localhost:5000/comment', {
+    fetch('https://gski-nig.herokuapp.com/comment', {
         headers: {
             'Content-type' : 'application/json'
         },
@@ -68,7 +68,7 @@ if(nameInput.value == "") {
 
 
 document.addEventListener('DOMContentLoaded' , function (){
-    fetch('http://localhost:5000/getAllCommentsIndexPage')
+    fetch('https://gski-nig.herokuapp.com/getAllCommentsIndexPage')
     .then(response => response.json())
     .then(data => fetchMinee(data['data']));
 
