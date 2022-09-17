@@ -114,7 +114,7 @@ class DbService {
 
 
     // ###############  Contact Us     ################
-    async ContactUs(name, email, phone, subject, message) {
+    async contactUs(name, email, phone, subject, message) {
         try {
             const dateAdded = new Date();
             const insert = await new Promise((resolve, reject) => {

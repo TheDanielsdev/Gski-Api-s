@@ -124,7 +124,7 @@ app.get('/getAllCommentsIndexPage', (request, response) => {
 app.post('/contactus', (req, res) => {
     const {name, email, phone, subject, message} = req.body;
     const db = dbService.getDbServiceInstance();
-    const result = db.signUpToNewsLetter(name, email, phone, subject, message); 
+    const result = db.contactUs(name, email, phone, subject, message); 
     
      //########   For User ##############
     var transport = nodemailer.createTransport({
@@ -174,11 +174,6 @@ app.post('/contactus', (req, res) => {
             console.log('Admin Email sent: ' + info.response);
         }
     });
-
-
-
-
-
     // if(!firstname && email) {
     //     res.status(400).json({ message: 'all reqired'})
     // }
